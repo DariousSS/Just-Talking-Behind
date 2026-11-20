@@ -1,0 +1,34 @@
+kantanMapper 输入：[]
+kantanMapper 参数里和背景有关的：[('bgcolorr', 0.0), ('bgcolorg', 0.0), ('bgcolorb', 0.0), ('bgalpha', 0.0), ('borderbg', 0.0), ('dragdropcallbacks', None)]
+形状 item0 名字=item0 贴图= 显示贴图= render=True
+形状 item4 名字=天使 贴图=/project1/sc_left 显示贴图=True render=False
+形状 item5 名字=盖子(卧室) 贴图=/project1/sc_gamelid 显示贴图=True render=True
+形状 item10 名字=/ 贴图=/project1/sc_black 显示贴图=True render=False
+形状 item11 名字=封面 贴图=/project1/sc_intro 显示贴图=True render=False
+形状 item14 名字=钢琴书 贴图=/project1/sc_piano 显示贴图=True render=False
+形状 item15 名字=item15 贴图=/project1/sc_pull 显示贴图=True render=True
+形状 item16 名字=/ 贴图=/project1/sc_black 显示贴图=True render=False
+形状 item17 名字=/ 贴图=/project1/sc_black 显示贴图=True render=False
+形状 item18 名字=左面具(入侵时出现脸) 贴图=/project1/sc_maskL 显示贴图=True render=True
+形状 item19 名字=右脸(一直说话) 贴图=/project1/sc_maskR 显示贴图=True render=False
+形状 item20 名字=光点数 贴图=/project1/sc_count 显示贴图=True render=False
+形状 item21 名字=日历 贴图=/project1/sc_cal 显示贴图=True render=False
+形状 item22 名字=我的视角 贴图=/project1/sc_my 显示贴图=True render=True
+形状 item23 名字=他人视角 贴图=/project1/sc_sub 显示贴图=True render=True
+形状 item25 名字=书本左边 贴图=/project1/sc_book_L 显示贴图=True render=True
+形状 item26 名字=伤口 贴图=/project1/sk_draw 显示贴图=True render=True
+形状 item27 名字=云朵 贴图=/project1/sc_blob 显示贴图=True render=False
+形状 item28 名字=书本右边 贴图=/project1/sc_book_R 显示贴图=True render=True
+形状 merge1 名字= 贴图= 显示贴图= render=?
+形状 table1 名字= 贴图= 显示贴图= render=?
+形状 elements 名字= 贴图= 显示贴图= render=?
+形状 selectTree 名字= 贴图= 显示贴图= render=?
+形状 replicator1 名字= 贴图= 显示贴图= render=?
+形状 eval_stepSize 名字= 贴图= 显示贴图= render=?
+形状 replicator1_callbacks 名字= 贴图= 显示贴图= render=?
+gz_final: overTOP 输入=['/project1/hand_fit', '/project1/gz_over']
+gz_over: overTOP 输入=['/project1/ball_tf', '/project1/gz_fit']
+board_view: crossTOP 输入=['/project1/gz_final', '/project1/board_screen']
+map_sel: selectTOP 输入=[]
+map_fit: fitTOP 输入=['/project1/map_sel']
+sc_perfstage: containerCOMP 输入=[]

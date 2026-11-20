@@ -1,0 +1,80 @@
+摄像头: Logitech StreamCam (046d:0893)
+菜单: ['Logitech StreamCam (046d:0893)', 'FaceTime HD Camera (3A71:F4B5)']
+par Generatehandgui (Generate GUI) = False
+par Detectgestures (Detect hands) = True
+par Gnumhands (Max Number of Hands) = 2
+---- MediaPipe1 里面的节点 ----
+pose [outDAT] 行数=1
+hands [outDAT] 行数=1
+hold1 [holdCHOP] 通道数=6 前3个通道=[('detectTime', 11.0), ('drawTime', 0.0), ('sourceFrameRate', 30.0)]
+info1 [infoCHOP] 通道数=23 前3个通道=[('num_handle_updates', 406.0), ('loaded', 1.0), ('update_frame', 358.0)]
+math1 [mathCHOP] 通道数=1 前3个通道=[('loaded', 1.0)]
+null1 [nullCHOP] 通道数=1 前3个通道=[('loaded', 1.0)]
+over1 [overTOP] 分辨率=1280x720
+text1 [textDAT] 行数=1
+text2 [textDAT] 行数=1
+text3 [textTOP] 分辨率=1280x720
+video [outTOP] 分辨率=1280x720
+Viewer [nullTOP] 分辨率=1280x720
+images [outDAT] 行数=1
+limit1 [limitCHOP] 通道数=1 前3个通道=[('loaded', 180.0)]
+logic1 [logicCHOP] 通道数=1 前3个通道=[('loaded', 1.0)]
+timer2 [timerCHOP] 通道数=3 前3个通道=[('timer_fraction', 0.0), ('ready', 1.0), ('done', 0.0)]
+timers [scriptCHOP] 通道数=3 前3个通道=[('detectTime', 11.0), ('drawTime', 0.0), ('sourceFrameRate', 30.0)]
+objects [outDAT] 行数=1
+select1 [selectCHOP] 通道数=1 前3个通道=[('loaded', 406.0)]
+switch1 [switchTOP] 分辨率=1280x720
+parexec1 [parameterexecuteDAT] 行数=1
+realTime [outCHOP] 通道数=6 前3个通道=[('detectTime', 11.0), ('drawTime', 0.0), ('sourceFrameRate', 30.0)]
+test_url [textDAT] 行数=1
+annotate1 [annotateCOMP]
+annotate2 [annotateCOMP]
+annotate3 [annotateCOMP]
+annotate5 [annotateCOMP]
+annotate6 [annotateCOMP]
+annotate7 [annotateCOMP]
+annotate8 [annotateCOMP]
+constant2 [constantCHOP] 通道数=1 前3个通道=[('chan1', 1.0)]
+init_port [executeDAT] 行数=1
+parameter1 [parameterDAT] 行数=76
+transform1 [transformTOP] 分辨率=1280x720
+webserver1 [webserverDAT] 行数=0
+websocket1 [websocketDAT] 行数=2
+current_url [textDAT] 行数=1
+keyboardin1 [keyboardinCHOP] 通道数=1 前3个通道=[('k1', 0.0)]
+virtualFile [baseCOMP]
+webBrowser1 [containerCOMP]
+webcam_list [tableDAT] 行数=1
+webcam_menu [jsonDAT] 行数=3
+hand_results [textDAT] 行数=1
+pose_results [textDAT] 行数=1
+face_detector [containerCOMP]
+face_tracking [containerCOMP]
+hand_tracking [containerCOMP]
+image_results [textDAT] 行数=1
+pose_tracking [containerCOMP]
+MediaPipe_Logo [nullTOP] 分辨率=1280x720
+face_detectors [outDAT] 行数=1
+face_landmarks [outDAT] 行数=1
+object_results [textDAT] 行数=1
+pose_threshold [constantCHOP] 通道数=1 前3个通道=[('threshold', 0.0)]
+image_embedding [outDAT] 行数=1
+object_tracking [containerCOMP]
+image_embeddings [containerCOMP]
+timer2_callbacks [textDAT] 行数=1
+external_tox_check [executeDAT] 行数=1
+image_segmentation [containerCOMP]
+par_change_handler [datexecuteDAT] 行数=1
+script1_callbacks1 [textDAT] 行数=1
+rebuild_custom_pars [textDAT] 行数=1
+image_classification [containerCOMP]
+webserver1_callbacks [textDAT] 行数=1
+websocket1_callbacks [textDAT] 行数=1
+face_detector_results [textDAT] 行数=1
+face_landmark_results [textDAT] 行数=1
+image_embedder_results [textDAT] 行数=1
+realtimeCalculatorCHOP [scriptCHOP] 通道数=6 前3个通道=[('detectTime', 11.0), ('drawTime', 0.0), ('sourceFrameRate', 30.0)]
+realtimeCalculator_callback [textDAT] 行数=1
+/project1/hand_tracking2: containerCOMP
+/project1/hand_tracking2/null2: nullSOP 点数=0
+/project1/hand_tracking2/null3: nullSOP 点数=0

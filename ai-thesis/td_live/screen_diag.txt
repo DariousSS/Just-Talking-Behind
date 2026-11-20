@@ -1,0 +1,6 @@
+monitor 0: {'width': 3024, 'height': 1964, 'left': 0, 'top': 1963, 'right': 3023, 'bottom': 0, 'isPrimary': True, 'description': ''}
+monitor 1: {'width': 1920, 'height': 1200, 'left': 2005, 'top': -1, 'right': 3924, 'bottom': -1200, 'isPrimary': False, 'description': ''}
+monitor 2: {'width': 1920, 'height': 1080, 'left': 3024, 'top': 1079, 'right': 4943, 'bottom': 0, 'isPrimary': False, 'description': ''}
+gz_win: isOpen=False {'display': 2, 'justifyoffsetto': 'specifydisplay', 'justifyh': 'left', 'justifyv': 'top', 'winoffsetx': 0, 'winoffsety': 0, 'winw': 1920, 'winh': 1080, 'borders': False}
+sc_win2: isOpen=True {'display': 1, 'justifyoffsetto': 'specifydisplay', 'justifyh': 'left', 'justifyv': 'top', 'winoffsetx': 0, 'winoffsety': 0, 'winw': 1920, 'winh': 1200, 'borders': False}
+bed_display() 选的是：1

@@ -1,0 +1,7 @@
+sc_room: {'type': 'moviefileinTOP', 'file': '/Users/shanzeyang/Desktop/I can Here You/ai-thesis/suitcase/game/room_day1.png', 'cross': '', 'size': '1600x820', 'errors': '', 'warnings': '', 'inputs': []}
+sc_room_B: {'type': 'moviefileinTOP', 'file': '/Users/shanzeyang/Desktop/I can Here You/ai-thesis/suitcase/game/room_day2.png', 'cross': '', 'size': '1600x820', 'errors': '', 'warnings': '', 'inputs': []}
+sc_room_x: {'type': 'crossTOP', 'file': '', 'cross': 1.0, 'size': '1600x820', 'errors': '', 'warnings': '', 'inputs': ['sc_room', 'sc_room_B']}
+sc_gamelid: {'type': 'glslTOP', 'file': '', 'cross': '', 'size': '1024x544', 'errors': '', 'warnings': '', 'inputs': ['sc_room_x']}
+game_exec 里的 BASE：['/Users/shanzeyang/Desktop/I can Here You/ai-thesis/suitcase']
+游戏状态：state=tell day=1 week=2
+game_exec 有没有双缓冲代码：True

@@ -40,7 +40,8 @@ void main()
 	float lit = (1.0 - smoothstep(R * 0.55, R, d)) * vis;
 	col = mix(col, clearc * 0.75, lit);
 	float ring = (1.0 - smoothstep(0.0, 0.012, abs(d - R))) * vis;
-	col += vec3(1.0, 0.88, 0.58) * 0.7 * ring;
+	col += vec3(0.78, 0.66, 1.0) * 0.75 * ring;          // 手电筒光圈：淡紫色（原来是暖黄 1.0, 0.88, 0.58）
+	col += vec3(0.55, 0.40, 0.95) * 0.07 * lit;           // 圈里一点点淡紫的光
 	float dd = length((uv - uD.xy) * vec2(asp, 1.0));
 	col *= 1.0 - 0.6 * uD.z * exp(-dd * 22.0);
 	col += vec3(1.0, 0.95, 0.7) * uD.z * (1.6 * smoothstep(0.045, 0.0, dd) + 0.7 * exp(-dd * 18.0));

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="780" viewBox="0 0 1800 780" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ar" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L0,8 L11,4 z" fill="#555"/></marker></defs>
+<rect width="1800" height="780" fill="#fff"/>
+<line x1="300" y1="135.0" x2="386" y2="135.0" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<line x1="670" y1="135.0" x2="756" y2="135.0" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<line x1="1040" y1="135.0" x2="1126" y2="135.0" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<text x="1083.0" y="119.0" font-size="32" font-weight="bold" text-anchor="middle" fill="#333">MIDI</text>
+<line x1="1270.0" y1="210" x2="1270.0" y2="326" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<text x="1286.0" y="278.0" font-size="32" font-weight="bold" text-anchor="start" fill="#333">audio</text>
+<line x1="1410" y1="405.0" x2="1496" y2="405.0" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<line x1="900.0" y1="210" x2="900.0" y2="326" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<line x1="760" y1="405.0" x2="674" y2="405.0" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<line x1="900.0" y1="480" x2="900.0" y2="596" stroke="#555" stroke-width="5" marker-end="url(#ar)"/>
+<rect x="20" y="60" width="280" height="150" rx="18" fill="#dff3e3" stroke="#2e8b57" stroke-width="5"/>
+<text x="160.0" y="148" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">Hand</text>
+<rect x="390" y="60" width="280" height="150" rx="18" fill="#dff3e3" stroke="#2e8b57" stroke-width="5"/>
+<text x="530.0" y="126" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">Camera</text>
+<text x="530.0" y="174" font-size="32" text-anchor="middle" fill="#333">MediaPipe</text>
+<rect x="760" y="60" width="280" height="150" rx="18" fill="#fff4cc" stroke="#b08900" stroke-width="5"/>
+<text x="900.0" y="126" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">TouchDesigner</text>
+<text x="900.0" y="174" font-size="32" text-anchor="middle" fill="#333">hand to note</text>
+<rect x="1130" y="60" width="280" height="150" rx="18" fill="#dbe9ff" stroke="#2f5fb3" stroke-width="5"/>
+<text x="1270.0" y="126" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">GarageBand</text>
+<text x="1270.0" y="174" font-size="32" text-anchor="middle" fill="#333">Dream Voice</text>
+<rect x="1130" y="330" width="280" height="150" rx="18" fill="#fff4cc" stroke="#b08900" stroke-width="5"/>
+<text x="1270.0" y="396" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">TouchDesigner</text>
+<text x="1270.0" y="444" font-size="32" text-anchor="middle" fill="#333">distortion</text>
+<rect x="1500" y="330" width="280" height="150" rx="18" fill="#dbe9ff" stroke="#2f5fb3" stroke-width="5"/>
+<text x="1640.0" y="418" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">Speakers</text>
+<rect x="760" y="330" width="280" height="150" rx="18" fill="#ecdcff" stroke="#6a35c9" stroke-width="5"/>
+<text x="900.0" y="396" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">Lucy</text>
+<text x="900.0" y="444" font-size="32" text-anchor="middle" fill="#333">hidden layers</text>
+<rect x="390" y="330" width="280" height="150" rx="18" fill="#ecdcff" stroke="#6a35c9" stroke-width="5"/>
+<text x="530.0" y="396" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">Wardrobe</text>
+<text x="530.0" y="444" font-size="32" text-anchor="middle" fill="#333">faces</text>
+<rect x="760" y="600" width="280" height="150" rx="18" fill="#ecdcff" stroke="#6a35c9" stroke-width="5"/>
+<text x="900.0" y="666" font-size="34" font-weight="bold" text-anchor="middle" fill="#222">Quilt</text>
+<text x="900.0" y="714" font-size="32" text-anchor="middle" fill="#333">face kaleidoscope</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#777"/></marker></defs>
+<rect width="1800" height="900" fill="#fff"/>
+<path d="M105.0,60 C105.0,15 1645.0,15 1645.0,60" fill="none" stroke="#c4c4c4" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M259.0,160 C259.0,115 1491.0,115 1491.0,160" fill="none" stroke="#c4c4c4" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M413.0,260 C413.0,215 1337.0,215 1337.0,260" fill="none" stroke="#c4c4c4" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M567.0,360 C567.0,315 1183.0,315 1183.0,360" fill="none" stroke="#c4c4c4" stroke-width="3" stroke-dasharray="9 7"/>
+<path d="M721.0,460 C721.0,415 1029.0,415 1029.0,460" fill="none" stroke="#c4c4c4" stroke-width="3" stroke-dasharray="9 7"/>
+<line x1="172" y1="106.0" x2="190" y2="206.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="326" y1="206.0" x2="344" y2="306.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="480" y1="306.0" x2="498" y2="406.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="634" y1="406.0" x2="652" y2="506.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="788" y1="506.0" x2="806" y2="606.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="942" y1="606.0" x2="960" y2="506.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="1096" y1="506.0" x2="1114" y2="406.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="1250" y1="406.0" x2="1268" y2="306.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="1404" y1="306.0" x2="1422" y2="206.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<line x1="1558" y1="206.0" x2="1576" y2="106.0" stroke="#777" stroke-width="4" marker-end="url(#ar)"/>
+<rect x="38" y="60" width="134" height="92" rx="14" fill="#7b3fe4" stroke="#4b1fa8" stroke-width="4"/>
+<text x="105.0" y="102" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">D0</text>
+<text x="105.0" y="138" font-size="28" text-anchor="middle" fill="#fff">128 px</text>
+<text x="105.0" y="190" font-size="30" font-weight="bold" text-anchor="middle" fill="#4b1fa8">Contour</text>
+<text x="105.0" y="224" font-size="28" text-anchor="middle" fill="#4b1fa8">ch 30</text>
+<rect x="192" y="160" width="134" height="92" rx="14" fill="#f1f1f1" stroke="#888" stroke-width="4"/>
+<text x="259.0" y="202" font-size="36" font-weight="bold" text-anchor="middle" fill="#222">D1</text>
+<text x="259.0" y="238" font-size="28" text-anchor="middle" fill="#222">64 px</text>
+<rect x="346" y="260" width="134" height="92" rx="14" fill="#7b3fe4" stroke="#4b1fa8" stroke-width="4"/>
+<text x="413.0" y="302" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">D2</text>
+<text x="413.0" y="338" font-size="28" text-anchor="middle" fill="#fff">32 px</text>
+<text x="413.0" y="390" font-size="30" font-weight="bold" text-anchor="middle" fill="#4b1fa8">Texture</text>
+<text x="413.0" y="424" font-size="28" text-anchor="middle" fill="#4b1fa8">ch 90</text>
+<rect x="500" y="360" width="134" height="92" rx="14" fill="#7b3fe4" stroke="#4b1fa8" stroke-width="4"/>
+<text x="567.0" y="402" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">D3</text>
+<text x="567.0" y="438" font-size="28" text-anchor="middle" fill="#fff">16 px</text>
+<text x="567.0" y="490" font-size="30" font-weight="bold" text-anchor="middle" fill="#4b1fa8">Dissolve</text>
+<text x="567.0" y="524" font-size="28" text-anchor="middle" fill="#4b1fa8">ch 96</text>
+<rect x="654" y="460" width="134" height="92" rx="14" fill="#f1f1f1" stroke="#888" stroke-width="4"/>
+<text x="721.0" y="502" font-size="36" font-weight="bold" text-anchor="middle" fill="#222">D4</text>
+<text x="721.0" y="538" font-size="28" text-anchor="middle" fill="#222">8 px</text>
+<rect x="808" y="560" width="134" height="92" rx="14" fill="#7b3fe4" stroke="#4b1fa8" stroke-width="4"/>
+<text x="875.0" y="602" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">MID</text>
+<text x="875.0" y="638" font-size="28" text-anchor="middle" fill="#fff">8 px</text>
+<text x="875.0" y="690" font-size="30" font-weight="bold" text-anchor="middle" fill="#4b1fa8">Distortion</text>
+<text x="875.0" y="724" font-size="28" text-anchor="middle" fill="#4b1fa8">ch 231</text>
+<rect x="962" y="460" width="134" height="92" rx="14" fill="#f1f1f1" stroke="#888" stroke-width="4"/>
+<text x="1029.0" y="502" font-size="36" font-weight="bold" text-anchor="middle" fill="#222">U0</text>
+<text x="1029.0" y="538" font-size="28" text-anchor="middle" fill="#222">8 px</text>
+<rect x="1116" y="360" width="134" height="92" rx="14" fill="#f1f1f1" stroke="#888" stroke-width="4"/>
+<text x="1183.0" y="402" font-size="36" font-weight="bold" text-anchor="middle" fill="#222">U1</text>
+<text x="1183.0" y="438" font-size="28" text-anchor="middle" fill="#222">16 px</text>
+<rect x="1270" y="260" width="134" height="92" rx="14" fill="#f1f1f1" stroke="#888" stroke-width="4"/>
+<text x="1337.0" y="302" font-size="36" font-weight="bold" text-anchor="middle" fill="#222">U2</text>
+<text x="1337.0" y="338" font-size="28" text-anchor="middle" fill="#222">32 px</text>
+<rect x="1424" y="160" width="134" height="92" rx="14" fill="#f6a04d" stroke="#b3631a" stroke-width="4"/>
+<text x="1491.0" y="202" font-size="36" font-weight="bold" text-anchor="middle" fill="#222">U3</text>
+<text x="1491.0" y="238" font-size="28" text-anchor="middle" fill="#222">64 px</text>
+<text x="1491.0" y="290" font-size="30" font-weight="bold" text-anchor="middle" fill="#b3631a">Gaze</text>
+<rect x="1578" y="60" width="134" height="92" rx="14" fill="#7b3fe4" stroke="#4b1fa8" stroke-width="4"/>
+<text x="1645.0" y="102" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">U4</text>
+<text x="1645.0" y="138" font-size="28" text-anchor="middle" fill="#fff">128 px</text>
+<text x="1645.0" y="190" font-size="30" font-weight="bold" text-anchor="middle" fill="#4b1fa8">Fine detail</text>
+<text x="1645.0" y="224" font-size="28" text-anchor="middle" fill="#4b1fa8">ch 67</text>
+<rect x="60" y="814" width="34" height="34" rx="6" fill="#7b3fe4" stroke="#4b1fa8" stroke-width="3"/>
+<text x="108" y="842" font-size="30" fill="#222">edited channel</text>
+<rect x="420" y="814" width="34" height="34" rx="6" fill="#f6a04d" stroke="#b3631a" stroke-width="3"/>
+<text x="468" y="842" font-size="30" fill="#222">gaze layer</text>
+</svg>

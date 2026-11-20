@@ -178,7 +178,7 @@ def _real_hand(G):
             return max(0.0, min(1.0, u)), max(0.0, min(1.0, v))
     return None
 
-def _clap(G):
+def _clap(G, gap=20, lo=None):
     if me.fetch('clap', False):
         me.store('clap', False)
         return True
@@ -189,9 +189,10 @@ def _clap(G):
         peak = float(abs(o.numpyArray()).max())
     except Exception:
         return False
+    G['peak_max'] = max(G.get('peak_max', 0.0), peak)          # 调试：看敲箱子最大有多响（peak_max）
     base = G['clap_base']
     G['clap_since'] += 1
-    is_clap = peak > CLAP_MIN and peak > CLAP_RATIO * max(base, 0.003) and G['clap_since'] > 20
+    is_clap = peak > (lo if lo is not None else _c('clap_min', CLAP_MIN)) and peak > _c('clap_ratio', CLAP_RATIO) * max(base, 0.003) and G['clap_since'] > gap
     if is_clap:
         G['clap_since'] = 0
         return True
@@ -522,7 +523,16 @@ def _frame():
         G['hz_t0'] = now
     G.setdefault('hz_t0', now)
     h = _hand(G, now)
-    if h is not None:
+    # --- 房间门：只有指尖（衣柜上的紫线）进了"房间框"（sk_exec 记下 sk_room_t），手电筒圈才出现、才能找/收集光点；没进房间就没有圈。关掉：cfg room_gate=False ---
+    inroom_ = True
+    try:
+        pj_ = op('/project1')
+        if _c('room_gate', False) and pj_.fetch('sk_on', True) and pj_.fetch('sk_ring_on', True) and not me.fetch('hand', None):
+            inroom_ = absTime.seconds - pj_.fetch('sk_room_t', -99.0) < 0.4
+    except Exception:
+        inroom_ = True
+    G['in_room'] = inroom_
+    if h is not None and inroom_:
         dist_ = math.hypot((h[0] - G['hx']) * LID_ASPECT, h[1] - G['hy'])
         tau_ = 0.006 + (_c('hand_tau', 0.02) - 0.006) * math.exp(-dist_ * 14.0)      # 手移得远（快）就几乎直接跟上；停着或微抖时才平滑
         k_ = 1.0 - math.exp(-dt_ / tau_)
@@ -583,6 +593,39 @@ def _frame():
         if state == 'tell' and _c('page_mode', True) and not _c('keys_in_page_mode', False):
             continue          # 挥手翻页模式下，空气钢琴/键盘的音符不再决定"出哪一句"（声音照常响），句子只由翻页决定，避免重复
         _press(G, key, now)
+    # --- 连续敲箱子（或拍手）clap_count（默认 4）下，每两下间隔不超过 clap_gap_max（默认 1 秒），每一下响度要超过 knock_min（默认 0.3）：
+    #     只在封面有用 = 开门开始（游戏中敲箱子不会回到开始）。关掉：cfg clap_start=False ---
+    if _c('clap_start', True):
+        try:
+            if _clap(G, 8, _c('knock_min', 0.3)):             # 只认够响的（小声的不算）；两下之间至少隔 8 帧（约 0.27 秒）
+                n_ = (G.get('clap_n', 0) + 1) if now - G.get('clap_last', -9.0) < _c('clap_gap_max', 1.0) else 1      # 连续敲：断了就从头数
+                G['clap_last'] = now
+                G['clap_n'] = n_
+                if n_ >= int(_c('clap_count', 4)):
+                    G['clap_n'] = 0
+                    if state == 'intro' and not G.get('door_open'):
+                        G['door_open'] = True
+        except Exception:
+            pass
+    # --- 封面：手在摄像头前持续挥动 wave_secs（默认 3）秒 = 开门开始（现在默认关掉，要用：cfg wave_start=True） ---
+    if state == 'intro' and not G.get('door_open') and _c('wave_start', False):
+        hs_ = now - G['seen_t'] < 0.4
+        if hs_ and math.hypot(G.get('vx', 0.0) * LID_ASPECT, G.get('vy', 0.0)) > _c('wave_speed', 0.35):
+            G['wave_mv'] = now                                  # 手在动（挥）
+        if hs_ and now - G.get('wave_mv', -9.0) < 0.6:
+            if G.get('wave_t0') is None:
+                G['wave_t0'] = now
+            if now - G['wave_t0'] >= _c('wave_secs', 3.0):
+                G['door_open'] = True
+                G['wave_t0'] = None
+        else:
+            G['wave_t0'] = None
+    else:
+        G['wave_t0'] = None
+    # --- 观众走了：游戏中 idle_reset_s（默认 60）秒都没看到手，自动回到封面；想关掉：cfg idle_reset_s=0 ---
+    if state != 'intro' and _c('idle_reset_s', 60.0) > 0 and now - G['seen_t'] > _c('idle_reset_s', 60.0) and now - G.get('state_t', now) > 5.0:
+        me.store('restart', True)
+        G['seen_t'] = now
     # --- 开场介绍：先是柜门上的书本封面，门打开（或 cover_s 秒后自动）才出现游戏规则 ---
     if state == 'intro' and not G.get('door_open'):
         if not _cover_on() or me.fetch('door_open', False) or (_c('cover_s', 0.0) > 0 and now - G.get('intro_t0', now) > _c('cover_s', 0.0)):
@@ -698,6 +741,12 @@ def _frame():
             a = 0.10 + 0.10 * max(0.0, math.sin(now * 2.2))
         if me.fetch('show_dot', False):
             a = max(a, 0.5)
+    # --- 只保留一个"鼠标"：找光点（search）时关掉衣柜上的紫线（sk_on=False），只有手电筒圈；其它时候（封面、翻书、结尾）紫线照常，圈不显示。cfg sk_hide_in_search=False 就不管 ---
+    try:
+        if _c('sk_hide_in_search', True):
+            op('/project1').store('sk_on', state != 'search')
+    except Exception:
+        pass
     # --- 写给盖子 ---
     lid = p.op('sc_gamelid')
     if lid is not None:
@@ -707,7 +756,7 @@ def _frame():
         lid.par.vec1valuex = fx
         lid.par.vec1valuey = fy
         lid.par.vec1valuez = R
-        lid.par.vec1valuew = 1.0 if seen else 0.0
+        lid.par.vec1valuew = 1.0 if (seen and G.get('in_room', True) and (state == 'search' or not _c('ring_only_search', True))) else 0.0      # 只在找光点（search）时显示手电筒圈，翻书等其它时候不显示（cfg ring_only_search=False 就一直显示）
         lid.par.vec2valuex = G['dot'][0]
         lid.par.vec2valuey = G['dot'][1]
         lid.par.vec2valuez = a
@@ -863,7 +912,7 @@ def _frame():
         if cs_ is not None:
             sx0_, sy0_, sx1_, sy1_ = _c('suit_box', (0.075, 0.208, 0.219, 0.39))       # 盖子房间图里行李箱的位置（盖子 0~1 坐标，y 向上）
             pad_ = _c('suit_pad', 0.02)
-            hov_ = seen and G['state'] == 'search' and sx0_ - pad_ <= fx <= sx1_ + pad_ and sy0_ - pad_ <= fy <= sy1_ + pad_
+            hov_ = _c('suit_hover', False) and seen and G['state'] == 'search' and sx0_ - pad_ <= fx <= sx1_ + pad_ and sy0_ - pad_ <= fy <= sy1_ + pad_
             if hov_:
                 G['suit_hold'] = now + _c('suit_hold', 0.35)
             tgt_ = 1.0 if (hov_ or now < G.get('suit_hold', 0.0)) else 0.0
@@ -880,7 +929,7 @@ def _frame():
     if p.op('sc_checker') is not None and _c('tex_guard', True) and now - G.get('tg_t', -9.0) > 4.0:
         G['tg_t'] = now
         for key_, nm_, tex_ in (('face_path', _c('face_shape', '人脸万花筒'), '/project1/sc_bed_face'), ('dot_path', _c('dot_shape', '光点出现区域'), '/project1/sc_bed_dot'), ('suit_path', _c('suit_shape', '行李箱'), '/project1/sc_chk_suit')):
-            if op(tex_) is None:
+            if op(tex_) is None or (key_ == 'suit_path' and not _c('suit_hover', False)):
                 continue
             sh3_ = _bed_shape(G, key_, nm_, now)
             sp3_ = sh3_.op('parameters') if sh3_ is not None else None
