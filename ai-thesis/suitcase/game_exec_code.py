@@ -101,6 +101,7 @@ def _play(name):
         pass
 
 def _new_day(G, now):
+    _PGC.clear()
     G['dot'] = (random.uniform(0.08, 0.92), random.uniform(0.2, 0.8))
     G['day_start'] = now
     G['pg_n'] = 0
@@ -328,11 +329,15 @@ def _bed_shape(G, key, name, now, kan='/project1/sc_bedkantan/kantanMapper'):
                     G[key] = c_.path
     return op(G[key]) if G.get(key) else None
 
+_PGC = {}     # 每一天随机排好的页（_new_day 里清空，所以每天、每周都重新随机）
+
 def _pages(day):
     # 这一天书里的页：故事按时间顺序切成 7 段，每天的白键（屋子里的声音）和黑键（她）交替排成页。想自己定：cfg day_pages = {天号 0~6: [('w', 编号 0~35) 或 ('b', 编号 0~24), ...]}
     dp_ = _c('day_pages', None)
     if dp_ and day in dp_:
         return list(dp_[day])
+    if _c('page_random', True) and day in _PGC:
+        return list(_PGC[day])
     w0_, w1_ = round(36 * day / 7.0), round(36 * (day + 1) / 7.0)
     b0_, b1_ = round(25 * day / 7.0), round(25 * (day + 1) / 7.0)
     W_ = [('w', i_) for i_ in range(w0_, w1_)]
@@ -343,7 +348,30 @@ def _pages(day):
             out_.append(W_[i_])
         if i_ < len(B_):
             out_.append(B_[i_])
-    return out_
+    if _c('page_random', True):
+        random.shuffle(out_)                                  # 其他的页每次随机排；关掉：cfg page_random=False
+        ks_ = _c('key_sent_idx', 8)                           # 关键句（默认第 9 句 "…cultural background…"）：它所在的那一天，固定当第一页
+        if ks_ is not None and ('w', ks_) in out_ and _c('key_first', True):
+            out_.remove(('w', ks_))
+            out_.insert(0, ('w', ks_))
+        _PGC[day] = out_
+    return list(out_)
+
+def _shown_sentence(T, now):
+    # 右墙现在显示的是哪一句（和 _text 里"一页一句"的逻辑一致）
+    told_ = T['told'] if T is not None else []
+    if not told_:
+        return None
+    lt_, l0_ = told_[-1]
+    if now >= l0_:
+        return lt_
+    if len(told_) > 1 and now < l0_ - (_c('book_flip_s', 1.3) * 0.4 if _book_on() else 0.0):
+        return told_[-2][0]
+    return None
+
+def _is_key(text):
+    ks_ = _c('key_sent_idx', 8)
+    return bool(text) and ks_ is not None and 0 <= ks_ < len(SENT) and text == SENT[ks_]
 
 def _wave(G, now):
     # 挥手翻页：手在画面里、左右移动得够快（vx 是手每秒横向移动的盖子宽度），并且离上次翻页超过 1.2 秒
@@ -663,6 +691,10 @@ def _frame():
                     pi_ = min(len(pages_) - 1, max(0, int((G['dot'][0] - 0.08) / 0.84 * len(pages_))))     # 第一页：光点在盖子上的位置（左→右）对应这一天的页（前→后）
                 else:
                     pi_ = (pi_ + 1) % len(pages_)
+                if T.get('pi') is None and _c('key_first', True) and _c('page_random', True):
+                    kp_ = [i_ for i_, x_ in enumerate(pages_) if x_ == ('w', _c('key_sent_idx', 8))]
+                    if kp_:
+                        pi_ = kp_[0]                  # 这一天有关键句：第一页固定翻到它
                 n0_ = T['n']
                 _press(G, pages_[pi_], now)
                 if T['n'] > n0_:
@@ -962,6 +994,12 @@ def _frame():
                 mt_.par.font = _c('my_font', 'Avenir Next')
             except Exception:
                 pass
+            kc2_ = _c('key_color', (1.0, 0.82, 0.15)) if (_c('key_hl', True) and _c('key_word', 'racism') in show_) else (1.0, 1.0, 1.0)      # 左边带 racism 的那句高亮（关掉：cfg key_hl=False；换词：cfg key_word）
+            for k2_, v2_ in zip(('fontcolorr', 'fontcolorg', 'fontcolorb'), kc2_):
+                try:
+                    setattr(mt_.par, k2_, v2_)
+                except Exception:
+                    pass
         ml_.par.opacity = max(0.0, a_)
     # --- 提示层（sc_hint_txt，另一种字体、更大）：只在抓到光点后、第一次按键之前显示 ---
     ht_ = p.op('sc_hint_txt')
@@ -985,9 +1023,13 @@ def _frame():
             txt.par.fontsizex = _c('sub_px', FONT_PX) if G['state'] == 'tell' else FONT_PX      # 听故事时（他人视角那块）字号可以单独调
         lv.par.opacity = 1.0
         red_ = G['state'] == 'end' and now - G['state_t'] >= _c('end_angel', END_ANGEL)
-        if red_ != G.get('last_red'):
-            G['last_red'] = red_
-            for k_, v_ in (('fontcolorr', 1.0), ('fontcolorg', 0.12 if red_ else 1.0), ('fontcolorb', 0.12 if red_ else 1.0)):
+        key_ = G['state'] == 'tell' and _c('key_hl', True) and _c('key_hl_right', False) and _is_key(_shown_sentence(G['tell'], now))      # 关键句高亮（关掉：cfg key_hl=False；颜色：cfg key_color）
+        col_ = 'red' if red_ else ('key' if key_ else 'white')
+        if col_ != G.get('last_red'):
+            G['last_red'] = col_
+            kc_ = _c('key_color', (1.0, 0.82, 0.15))
+            rgb_ = {'red': (1.0, 0.12, 0.12), 'key': kc_, 'white': (1.0, 1.0, 1.0)}[col_]
+            for k_, v_ in (('fontcolorr', rgb_[0]), ('fontcolorg', rgb_[1]), ('fontcolorb', rgb_[2])):
                 try:
                     setattr(txt.par, k_, v_)
                 except Exception:
